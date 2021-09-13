@@ -1,3 +1,3 @@
-# PHP_MVC_CORE
+# Amlake Advertise
 This is a simple advertise project made with 
 MVC pattern.
