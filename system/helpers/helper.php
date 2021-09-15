@@ -2,16 +2,14 @@
 
 function view($dir, $vars = []){
 
-    $viewBuilder = new System\View\ViewBuilder();
+    $viewBuilder = new \System\View\ViewBuilder();
     $viewBuilder->run($dir);
-
     $viewVars = $viewBuilder->vars;
-    $content  = $viewBuilder->content;
-
+    $content = $viewBuilder->content;
     empty($viewVars) ? : extract($viewVars);
     empty($vars) ? : extract($vars);
 
-    eval(" ?>" . html_entity_decode($content));
+    eval(" ?> ".html_entity_decode($content));
 }
 
 function dd($value, $die = true){
@@ -144,7 +142,7 @@ function findRouteByName($name){
 
 function route($name, $params = []){
 
-    if(is_array($params)){
+    if(!is_array($params)){
         throw new Exception('route params must be array');
     }
 

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use System\Database\DBBuilder\DBBuilder;
-
 class HomeController extends Controller {
 
     public function index(){
         //echo "index method in HomeController";
-        $tables = new DBBuilder();
 
     }
 

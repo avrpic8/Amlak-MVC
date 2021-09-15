@@ -6,28 +6,30 @@ trait HasIncludeContent{
 
     private function checkIncludesContent(){
 
-        while (1){
+        while(1)
+        {
             $includesNamesArray = $this->findIncludesNames();
             if(!empty($includesNamesArray)){
-                foreach ($includesNamesArray as $includeName){
+                foreach($includesNamesArray as $includeName){
                     $this->initialIncludes($includeName);
                 }
             }
-            else
+            else{
                 break;
+            }
         }
     }
 
     private function findIncludesNames(){
 
         $includesNamesArray = [];
-        preg_match("/@include+\('([^)]+)'\)/", $this->content, $includesNamesArray, PREG_UNMATCHED_AS_NULL);
+        preg_match_all("/@include+\('([^)]+)'\)/", $this->content, $includesNamesArray, PREG_UNMATCHED_AS_NULL);
         return isset($includesNamesArray[1]) ? $includesNamesArray[1] : false;
     }
 
     private function initialIncludes($includeName){
 
-        return $this->content =
+        $this->content =
             str_replace
             (
                 "@include('$includeName')",
