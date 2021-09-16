@@ -12,3 +12,11 @@ Route::delete('/delete/{id}', 'HomeController@destroy', 'delete');
 
 /// Admin Routes
 Route::get('/admin', 'Admin\AdminController@index', 'admin.index');
+
+// Category Routes
+Route::get('/admin/category', 'Admin\CategoryController@index', 'admin.category.index');
+Route::get('/admin/category/create', 'Admin\CategoryController@create', 'admin.category.create');
+Route::post('/admin/category/store', 'Admin\CategoryController@store', 'admin.category.store');
+Route::get('/admin/category/edit/{id}', 'Admin\CategoryController@edit', 'admin.category.edit');
+Route::put('/admin/category/update/{id}', 'Admin\CategoryController@update', 'admin.category.update');
+Route::delete('/admin/category/delete/{id}', 'Admin\CategoryController@destroy', 'admin.category.delete');

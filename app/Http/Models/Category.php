@@ -3,14 +3,12 @@
 namespace App\Http\Models;
 
 use System\Database\ORM\Model;
+use System\Database\Traits\HasSoftDelete;
 
 class Category extends Model {
 
+    use HasSoftDelete;
     protected $table = "categories";
-    protected $fillable = ['name'];
-    protected $casts = [];
-
-    public function posts(){
-        return $this->hasMany('\App\Http\Models\Post','cat_id', 'id');
-    }
+    protected $fillable = ['name','parent_id'];
+    protected $deletedAt = 'deleted_at';
 }
