@@ -1,9 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title')
-
-    <title>ادمین|ساخت دسته جدید</title>
-
+@section('head')
+    <title>ادمین | ساخت دسته جدید</title>
 @endsection
 
 @section('content')
@@ -32,7 +30,8 @@
                                         <fieldset class="form-group">
                                             <label for="helperText">نام دسته</label>
                                             <input value="<?= old('name')?>" name="name" type="text" id="helperText"
-                                                   class="form-control" placeholder="نام ...">
+                                                   class="form-control <?= errorClass('name')?>" placeholder="نام ...">
+                                            <?= errorText('name')?>
                                         </fieldset>
                                     </div>
 
@@ -40,13 +39,14 @@
                                         <fieldset class="form-group">
                                             <div class="form-group">
                                                 <label for="helperText">دسته والد</label>
-                                                <select name="parent_id" class="select2 form-control">
+                                                <select name="parent_id" class="select2 form-control <?= errorClass('parent_id')?> ">
                                                     <option value="">درصورت وجود والد انتخاب شود</option>
                                                     <?php foreach ($categories as $category){ ?>
                                                     <option value="<?= $category->id ?>" <?= old('parent_id') == $category->id ? 'selected' : '' ?>><?= $category->name ?></option>
                                                     <?php }?>
                                                 </select>
                                             </div>
+                                            <?= errorText('parent_id')?>
                                         </fieldset>
                                     </div>
 

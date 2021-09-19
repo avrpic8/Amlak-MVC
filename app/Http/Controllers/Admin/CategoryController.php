@@ -25,21 +25,28 @@ class CategoryController extends AdminController {
         $inputs = $request->all();
         if(empty($request->parent_id)) unset($inputs['parent_id']);
         Category::create($inputs);
-        return redirect('admin/category');
+        redirect('admin/category');
     }
 
     public function edit($id)
     {
-
+        $category = Category::find($id);
+        $categories = Category::all();
+        view('admin.category.edit', compact('category','categories'));
     }
 
-    public function update()
+    public function update($id)
     {
-
+        $request = new CategoryRequest();
+        $inputs  = $request->all();
+        if(empty($request->parent_id)) $inputs['parent_id'] = null;
+        Category::update(array_merge($inputs, ['id' => $id]));
+        redirect('admin/category');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-
+        Category::delete($id);
+        back();
     }
 }
