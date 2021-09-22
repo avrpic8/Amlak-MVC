@@ -56,7 +56,7 @@
 <div class="drag-target"></div>
 
 @include('admin.layouts.scripts')
-@yield('script')
+@yield('scripts')
 </body>
 
 </html>

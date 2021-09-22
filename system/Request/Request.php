@@ -8,63 +8,60 @@ use System\Request\Traits\HasValidationRules;
 
 class Request{
 
-    use HasFileValidationRules, HasRunValidation, HasValidationRules;
+    use HasValidationRules,HasFileValidationRules,HasRunValidation;
 
     protected bool $errorExist = false;
     protected $request;
     protected $files = null;
     protected $errorVariablesName = [];
 
-    public function __construct(){
-
-        if(isset($_POST))
+    public function __construct()
+    {
+        if(isset($_POST)) {
             $this->postAttributes();
-
+        }
         if(!empty($_FILES))
             $this->files = $_FILES;
-
         $rules = $this->rules();
         empty($rules) ? : $this->run($rules);
         $this->errorRedirect();
     }
 
-    protected function rules(){
+
+    protected function rules()
+    {
         return [];
     }
 
     protected function run($rules){
-
-        foreach ($rules as $att => $values){
-
+        foreach($rules as $att => $values){
             $ruleArray = explode('|', $values);
-            if(in_array('file', $ruleArray)){
-
+            if(in_array('file', $ruleArray))
+            {
                 unset($ruleArray[array_search('file', $ruleArray)]);
                 $this->fileValidation($att, $ruleArray);
             }
-            elseif(in_array('number', $ruleArray)){
-
+            elseif(in_array('number', $ruleArray))
+            {
                 $this->numberValidation($att, $ruleArray);
             }
-            else{
-
+            else
+            {
                 $this->normalValidation($att, $ruleArray);
             }
         }
     }
 
-    protected function postAttributes(){
+    public function file($name){
+        return isset($this->files[$name]) ? $this->files[$name] : false;
+    }
 
-        foreach ($_POST as $key => $value){
-
+    protected function postAttributes()
+    {
+        foreach($_POST as $key => $value){
             $this->$key = htmlentities($value);
             $this->request[$key] = htmlentities($value);
         }
-    }
-
-    public function file($name){
-
-        return isset($this->file[$name]) ? $this->file[$name] : false;
     }
 
     public function all(){
