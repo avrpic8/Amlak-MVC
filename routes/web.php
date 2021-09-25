@@ -28,3 +28,4 @@ Route::post('/admin/post/store', 'Admin\PostController@store', 'admin.post.store
 Route::get('/admin/post/edit/{id}', 'Admin\PostController@edit', 'admin.post.edit');
 Route::put('/admin/post/update/{id}', 'Admin\PostController@update', 'admin.post.update');
 Route::delete('/admin/post/delete/{id}', 'Admin\PostController@destroy', 'admin.post.delete');
+
